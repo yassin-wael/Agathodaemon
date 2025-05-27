@@ -1,0 +1,250 @@
+:root {
+    --bg-color: #0a0a0a; /* لون خلفية الصفحة الأساسي (أسود داكن جداً) */
+    --surface-color: #181818; /* لون سطح المحتوى الرئيسي (أغمق قليلاً من السابق) */
+    --primary-text-color: #e0e0e0;
+    --secondary-text-color: #b3b3b3;
+    --accent-color: #1DB954; /* لون سبوتيفاي الأخضر أو أي لون تفضله */
+    --border-color: #282828;
+    --spotify-verified-badge-color: #3D91F4; /* لون علامة التوثيق الزرقاء */
+}
+
+body {
+    margin: 0;
+    font-family: 'Cairo', sans-serif;
+    background-color: var(--bg-color); /* خلفية الصفحة بسيطة وداكنة */
+    color: var(--primary-text-color);
+    line-height: 1.6;
+    box-sizing: border-box;
+}
+
+/* ========= Hero Section Styles ========= */
+.hero-section {
+    height: 45vh; /* ارتفاع الهيدر، يمكنك تعديله */
+    min-height: 300px; /* أقل ارتفاع لضمان ظهوره بشكل جيد */
+    /* 
+      هام: استبدل 'spotify-banner-default.jpg' بصورة الخلفية التي اخترتها.
+      يفضل أن تكون صورة ذات جودة عالية ومناسبة كخلفية للهيدر.
+      مثال: خلفية فضاء، خلفية مدينة ليلية، أو خلفية مجردة داكنة.
+    */
+    background-image: url('spotify-banner-default.jpg');
+    background-color: #050505; /* لون احتياطي إذا لم يتم تحميل الصورة */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* توسيط المحتوى رأسياً */
+    align-items: center; /* توسيط المحتوى أفقياً */
+    padding: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    position: relative; /* لوضع طبقة تعتيم اختيارية */
+}
+
+/* طبقة تعتيم خفيفة فوق صورة الهيدر لتحسين وضوح النص */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* درجة التعتيم، عدلها حسب الحاجة */
+    z-index: 1; /* خلف محتوى الهيدر */
+}
+.hero-section::before {
+    content: '';
+    background: url(https://i.scdn.co/image/ab67616d00001e026a92559447b7d7f5bcc9a64f) no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(0, 0, 0, 0.4); */
+    z-index: 1;
+}
+.hero-content {
+    position: relative; /* ليكون فوق طبقة التعتيم */
+    z-index: 2;
+}
+
+.artist-tag {
+    font-size: 0.9em; /* حجم كلمة ARTIST */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.8); /* لون أبيض شبه شفاف */
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+    display: inline-flex; /* لترتيب النص والأيقونة */
+    align-items: center;
+}
+
+.artist-tag .verified-badge {
+    color: var(--spotify-verified-badge-color);
+    margin-left: 8px; /* المسافة بين كلمة ARTIST والأيقونة (بما أن dir="ltr") */
+    font-size: 1.1em;
+}
+
+.hero-artist-name {
+    font-size: clamp(2.8rem, 9vw, 6rem); /* حجم اسم الفنان (متجاوب) */
+    font-weight: 900; /* خط عريض جداً */
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.05;
+    text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.6); /* ظل للنص لزيادة الوضوح */
+}
+
+/* ========= Main Content Container Styles ========= */
+.container {
+    width: 100%;
+    max-width: 850px; /* يمكنك زيادة عرض المحتوى قليلاً */
+    background-color: var(--surface-color);
+    padding: 20px 30px 30px 30px; /* تم تعديل الـ padding العلوي */
+    /* لا يوجد border-radius علوي الآن لأنه يندمج مع الهيدر */
+    border-radius: 0 0 12px 12px; /* زوايا دائرية سفلية فقط */
+    margin: 0 auto 40px auto; /* توسيط وتحديد مسافة سفلية */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); /* ظل أقوى قليلاً */
+    text-align: center;
+    position: relative; /* لضمان z-index يعمل بشكل صحيح للصورة المتداخلة */
+    z-index: 2; /* فوق أي عناصر خلفية محتملة للصفحة ولكن تحت الصورة الشخصية المتداخلة إذا كانت فوقه */
+}
+
+.artist-header {
+    margin-bottom: 30px;
+}
+
+.artist-image { /* الصورة الشخصية الدائرية */
+    width: 160px; /* حجم الصورة الدائرية */
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--surface-color); /* إطار بلون سطح المحتوى لمزجها */
+    margin-top: -90px; /* !!!! تسحب الصورة للأعلى لتتداخل مع الـ Hero Section !!!! */
+    margin-bottom: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    position: relative; /* لضمان بقائها فوق العناصر الأخرى */
+    z-index: 10; /* أعلى z-index لتكون فوق كل شيء تقريبًا في الهيدر */
+}
+
+.artist-header h2 { /* اسم الفنان أسفل الصورة الدائرية */
+    font-size: 2.2em;
+    margin-top: 0; /* لا يوجد margin علوي كبير لأن الصورة فوقه */
+    margin-bottom: 5px;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.real-name {
+    font-size: 1em;
+    color: var(--secondary-text-color);
+    margin-top: 0;
+}
+
+/* ... باقي الأنماط لـ h2 العامة، biography, music-platforms, footer تبقى كما هي تقريبًا ... */
+
+h2 { /* أنماط عناوين الأقسام مثل "عني" و "استمع لي على" */
+    font-size: 1.8em;
+    color: var(--accent-color); /* اللون المميز */
+    margin-top: 30px; /* مسافة إضافية علوية للتمييز */
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border-color);
+    display: inline-block;
+}
+
+.biography p {
+    font-size: 1.1em;
+    color: var(--primary-text-color);
+    text-align: justify;
+    margin-bottom: 1.2em;
+}
+.lang-ar p { text-align: right; }
+.lang-en p { text-align: left; direction: ltr; }
+.bio-divider { border: 0; height: 1px; background-color: var(--border-color); margin: 30px 0; }
+
+.platforms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+/* ... (نفس أنماط platform-link من قبل) ... */
+.platform-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    background-color: #222222; /* لون أغمق للروابط */
+    color: var(--primary-text-color);
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    border: 1px solid #303030; /* لون إطار أفتح قليلاً */
+}
+.platform-link:hover {
+    transform: translateY(-3px);
+    /* Hover colors remain the same */
+}
+.platform-link i { margin-left: 10px; font-size: 1.5em; }
+.anghami-icon { width: 24px; height: 24px; margin-left: 10px; filter: invert(85%) sepia(0%) saturate(100%) hue-rotate(150deg) brightness(90%) contrast(85%); }
+
+.platform-link.spotify:hover { background-color: #1DB954; color: #fff;}
+.platform-link.apple-music:hover { background-color: #FA57C1; color: #fff;}
+.platform-link.anghami:hover { background-color: #29abe2; color: #fff;}
+.platform-link.youtube-music:hover { background-color: #FF0000; color: #fff;}
+.platform-link.deezer:hover { background-color: #EF5466; color: #fff;}
+.platform-link.soundcloud:hover { background-color: #FF5500; color: #fff;}
+
+
+footer {
+    margin-top: 50px;
+    padding-top: 25px;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9em;
+    color: var(--secondary-text-color);
+}
+
+@media (max-width: 768px) {
+    .hero-artist-name {
+        font-size: clamp(2.2rem, 10vw, 4.5rem); /* تعديل حجم الخط للشاشات الأصغر */
+    }
+    .artist-image {
+        width: 130px;
+        height: 130px;
+        margin-top: -70px; /* تعديل التداخل للشاشات الأصغر */
+    }
+    .container {
+        padding: 15px 20px 20px 20px;
+        margin: 0 auto 30px auto;
+    }
+     .artist-header h2 {
+        font-size: 1.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        height: 40vh;
+        min-height: 250px;
+    }
+    .hero-artist-name {
+        font-size: clamp(2rem, 12vw, 3.5rem);
+    }
+    .artist-image {
+        width: 110px;
+        height: 110px;
+        margin-top: -60px;
+        border-width: 4px;
+    }
+    .platforms-grid {
+        grid-template-columns: 1fr; /* Stack links on smaller screens */
+    }
+     .artist-header h2 {
+        font-size: 1.6em;
+    }
+    h2 { /* عناوين الأقسام */
+        font-size: 1.5em;
+    }
+}
